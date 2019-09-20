@@ -90,13 +90,6 @@ export default {
       return 0;
     },
   },
-  watch:{
-    times() {
-      if (this.times < 0) {
-        this.times = '无限次';
-      };
-    }
-  },
 };
 </script>
 
