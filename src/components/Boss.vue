@@ -12,11 +12,11 @@
         </b-form-select>
       </b-form-group>
       <b-form-group>
-        <div class="mt-2 animated bounceInLeft">玩家防御: {{ playerDefense }}</div>
-        <div class="mt-2 animated bounceInRight">当前Boss攻击: {{ currentBossAttack }}</div>
-        <div class="mt-2 animated bounceInLeft">当前Boss防御: {{ currentBossAttack }}</div>
-        <div class="mt-2 animated bounceInRight">当前Boss血量: {{ currentBossBlood }}</div>
-        <div class="mt-2 animated bounceInLeft">承受攻击次数: {{ times }}</div>
+        <div class="mt-2">玩家防御: {{ animatedPlayerDefense }}</div>
+        <div class="mt-2">当前Boss攻击: {{ animatedCurrentBossAttack }}</div>
+        <div class="mt-2">当前Boss防御: {{ animatedCurrentBossDefense }}</div>
+        <div class="mt-2">当前Boss血量: {{ animatedCurrentBossBlood }}</div>
+        <div class="mt-2">承受攻击次数: {{ times }}</div>
       </b-form-group>
       <b-form-group>
         <b-badge href="#" variant="light">上次输入的数据</b-badge>
@@ -63,11 +63,19 @@ export default {
       map: 1,
       lastPlayerBlood: null,
       lastPlayerBone: null,
+      tweenedCurrentBossAttack: 0,
+      tweenedCurrentBossDefense: 0,
+      tweenedCurrentBossBlood: 0,
+      tweenedPlayerDefense: 0,
     };
   },
   mounted() {
     this.lastPlayerBlood = storage.get('player_blood');
     this.lastPlayerBone = storage.get('player_bone');
+    TweenLite.to(this.$data, 0.5, { tweenedPlayerDefense: this.playerDefense });
+    TweenLite.to(this.$data, 0.5, { tweenedCurrentBossAttack: this.currentBossAttack });
+    TweenLite.to(this.$data, 0.5, { tweenedCurrentBossDefense: this.currentBossDefense });
+    TweenLite.to(this.$data, 0.5, { tweenedCurrentBossBlood: this.currentBossBlood });
   },
   methods: {
     setPlayerBlood() {
@@ -115,6 +123,18 @@ export default {
       }
       return 0;
     },
+    animatedPlayerDefense: function() {
+      return this.tweenedPlayerDefense.toFixed(0);
+    },
+    animatedCurrentBossAttack: function() {
+      return this.tweenedCurrentBossAttack.toFixed(0);
+    },
+    animatedCurrentBossDefense: function() {
+      return this.tweenedCurrentBossDefense.toFixed(0);
+    },
+    animatedCurrentBossBlood: function() {
+      return this.tweenedCurrentBossBlood.toFixed(0);
+    },
   },
   watch: {
     playerBlood: function() {
@@ -122,6 +142,18 @@ export default {
     },
     playerBone: function() {
       storage.set('player_bone', this.playerBone);
+    },
+    playerDefense: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedPlayerDefense: newValue });
+    },
+    currentBossAttack: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedCurrentBossAttack: newValue });
+    },
+    currentBossDefense: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedCurrentBossDefense: newValue });
+    },
+    currentBossBlood: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedCurrentBossBlood: newValue });
     },
   }
 };

@@ -14,10 +14,10 @@
         <b-form-input v-model="enemyHarm" type="number" required placeholder="输入敌人对玩家伤害"></b-form-input>
       </b-form-group>
       <b-form-group>
-        <div class="mt-2 animated bounceInLeft">玩家防御: {{ playerDefense }}</div>
-        <div class="mt-2 animated bounceInRight">敌人防御: {{ enemyDefense }}</div>
-        <div class="mt-2 animated bounceInLeft">敌人攻击: {{ enemyAttack }}</div>
-        <div class="mt-2 animated bounceInRight">玩家总伤害: {{ playerTotalHarm }}</div>
+        <div class="mt-2">玩家防御: {{ animatedPlayerDefense }}</div>
+        <div class="mt-2">敌人防御: {{ animatedEnemyDefense }}</div>
+        <div class="mt-2">敌人攻击: {{ animatedEnemyAttack }}</div>
+        <div class="mt-2">玩家总伤害: {{ animatedPlayerTotalHarme }}</div>
       </b-form-group>
       <b-form-group>
         <b-badge href="#" variant="light">上次输入的数据</b-badge>
@@ -43,11 +43,19 @@ export default {
       enemyHarm: null,
       lastPlayerGas: null,
       lastPlayerBone: null,
+      tweenedPlayerDefense: 0,
+      tweenedEnemyDefense: 0,
+      tweenedEnemyAttack: 0,
+      tweenedPlayerTotalHarme: 0,
     };
   },
   mounted() {
     this.lastPlayerGas = storage.get('_player_gas');
     this.lastPlayerBone = storage.get('_player_bone');
+    TweenLite.to(this.$data, 0.5, { tweenedPlayerDefense: this.playerDefense });
+    TweenLite.to(this.$data, 0.5, { tweenedEnemyDefense: this.enemyDefense });
+    TweenLite.to(this.$data, 0.5, { tweenedEnemyAttack: this.enemyAttack });
+    TweenLite.to(this.$data, 0.5, { tweenedPlayerTotalHarme: this.playerTotalHarm });
   },
   methods: {
     setPlayerGas() {
@@ -103,6 +111,18 @@ export default {
       }
       return 0;
     },
+    animatedPlayerDefense: function() {
+      return this.tweenedPlayerDefense.toFixed(0);
+    },
+    animatedEnemyDefense: function() {
+      return this.tweenedEnemyDefense.toFixed(0);
+    },
+    animatedEnemyAttack: function() {
+      return this.tweenedEnemyAttack.toFixed(0);
+    },
+    animatedPlayerTotalHarme: function() {
+      return this.tweenedPlayerTotalHarme.toFixed(0);
+    },
   },
   watch: {
     playerGas: function() {
@@ -110,6 +130,18 @@ export default {
     },
     playerBone: function() {
       storage.set('_player_bone', this.playerBone);
+    },
+    playerDefense: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedPlayerDefense: newValue });
+    },
+    enemyDefense: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedEnemyDefense: newValue });
+    },
+    enemyAttack: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedEnemyAttack: newValue });
+    },
+    playerTotalHarm: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedPlayerTotalHarme: newValue });
     },
   }
 };
