@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view />
+    <transition name="custom-animated rotateOut" enter-active-class="animated rotateOut">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -16,5 +18,9 @@ export default {};
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.back {
+  width: 15%;
+  margin-top: 10%;
 }
 </style>

@@ -26,6 +26,7 @@
         <b-badge variant="dark" class="badge animated flipInY" @click="setPlayerBone">{{ lastPlayerBone }}</b-badge>
       </b-form-group>
     </b-form>
+    <img class="back" src="../assets/img/back.png" @click="preView">
   </b-container>
 </template>
 
@@ -74,6 +75,9 @@ export default {
     },
     setPlayerBone() {
       this.playerBone = this.lastPlayerBone;
+    },
+    preView() {
+      this.$router.go(-1);
     }
   },
   computed: {
