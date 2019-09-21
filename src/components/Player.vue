@@ -46,9 +46,6 @@ export default {
       }
       return 0;
     },
-    enemyGas: function() {
-      return;
-    },
     enemyBone: function() {
       if (this.playerBone > 0) {
         return this.enemyDefense / 5;
