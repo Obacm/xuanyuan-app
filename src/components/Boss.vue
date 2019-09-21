@@ -81,7 +81,7 @@ export default {
     },
     times: function() {
       if (this.playerDefense > 0 && this.playerBlood > 0) {
-        let times = Math.floor(this.playerBlood / (this.currentBossAttack - this.playerDefense));
+        let times = Math.ceil(this.playerBlood / (this.currentBossAttack - this.playerDefense));
         if (times < 0) {
             times = '无限次';
         }
