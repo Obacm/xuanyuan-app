@@ -12,18 +12,18 @@
         </b-form-select>
       </b-form-group>
       <b-form-group>
-        <div class="mt-2">玩家防御: {{ playerDefense }}</div>
-        <div class="mt-2">当前Boss攻击: {{ currentBossAttack }}</div>
-        <div class="mt-2">当前Boss防御: {{ currentBossAttack }}</div>
-        <div class="mt-2">当前Boss血量: {{ currentBossBlood }}</div>
-        <div class="mt-2">承受攻击次数: {{ times }}</div>
+        <div class="mt-2 animated bounceInLeft">玩家防御: {{ playerDefense }}</div>
+        <div class="mt-2 animated bounceInRight">当前Boss攻击: {{ currentBossAttack }}</div>
+        <div class="mt-2 animated bounceInLeft">当前Boss防御: {{ currentBossAttack }}</div>
+        <div class="mt-2 animated bounceInRight">当前Boss血量: {{ currentBossBlood }}</div>
+        <div class="mt-2 animated bounceInLeft">承受攻击次数: {{ times }}</div>
       </b-form-group>
       <b-form-group>
         <b-badge href="#" variant="light">上次输入的数据</b-badge>
       </b-form-group>
       <b-form-group>
-        <b-badge variant="primary" class="badge" @click="setPlayerBlood">{{ lastPlayerBlood }}</b-badge>
-        <b-badge variant="dark" @click="setPlayerBone">{{ lastPlayerBone }}</b-badge>
+        <b-badge variant="primary" class="badge animated flipInX" @click="setPlayerBlood">{{ lastPlayerBlood }}</b-badge>
+        <b-badge variant="dark" class="badge animated flipInY" @click="setPlayerBone">{{ lastPlayerBone }}</b-badge>
       </b-form-group>
     </b-form>
   </b-container>

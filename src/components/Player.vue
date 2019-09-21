@@ -14,10 +14,10 @@
         <b-form-input v-model="enemyHarm" type="number" required placeholder="输入敌人对玩家伤害"></b-form-input>
       </b-form-group>
 
-      <div class="mt-2">玩家防御: {{ playerDefense }}</div>
-      <div class="mt-2">敌人防御: {{ enemyDefense }}</div>
-      <div class="mt-2">敌人攻击: {{ enemyAttack }}</div>
-      <div class="mt-2">玩家总伤害: {{ playerTotalHarm }}</div>
+      <div class="mt-2 animated bounceInLeft">玩家防御: {{ playerDefense }}</div>
+      <div class="mt-2 animated bounceInRight">敌人防御: {{ enemyDefense }}</div>
+      <div class="mt-2 animated bounceInLeft">敌人攻击: {{ enemyAttack }}</div>
+      <div class="mt-2 animated bounceInRight">玩家总伤害: {{ playerTotalHarm }}</div>
     </b-form>
   </b-container>
 </template>
