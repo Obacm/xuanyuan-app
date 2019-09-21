@@ -26,10 +26,10 @@
 export default {
   data() {
     return {
-      playerGas: '',
-      playerBone: '',
-      playerHarm: '',
-      enemyHarm: '',
+      playerGas: null,
+      playerBone: null,
+      playerHarm: null,
+      enemyHarm: null,
     };
   },
   methods: {},
