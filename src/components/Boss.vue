@@ -18,11 +18,20 @@
         <div class="mt-2">当前Boss血量: {{ currentBossBlood }}</div>
         <div class="mt-2">承受攻击次数: {{ times }}</div>
       </b-form-group>
+      <b-form-group>
+        <b-badge href="#" variant="light">上次输入的数据</b-badge>
+      </b-form-group>
+      <b-form-group>
+        <b-badge variant="primary" class="badge" @click="setPlayerBlood">{{ lastPlayerBlood }}</b-badge>
+        <b-badge variant="dark" @click="setPlayerBone">{{ lastPlayerBone }}</b-badge>
+      </b-form-group>
     </b-form>
   </b-container>
 </template>
 
 <script>
+import { storage } from '../utils/storage'
+
 export default {
   data() {
     return {
@@ -51,9 +60,23 @@ export default {
         { text: '天图二十', value: 20, attack: 2905000, defense: 2905000, blood: 8715000 }
       ],
       map: 1,
+      lastPlayerBlood: null,
+      lastPlayerBone: null,
+      show: true,
     };
   },
-  methods: {},
+  mounted() {
+    this.lastPlayerBlood = storage.get('player_blood');
+    this.lastPlayerBone = storage.get('player_bone');
+  },
+  methods: {
+    setPlayerBlood() {
+      this.playerBlood = this.lastPlayerBlood;
+    },
+    setPlayerBone() {
+      this.playerBone = this.lastPlayerBone;
+    }
+  },
   computed: {
     playerDefense: function() {
       if (this.playerBone > 0) {
@@ -90,11 +113,22 @@ export default {
       return 0;
     },
   },
+  watch: {
+    playerBlood: function() {
+      storage.set('player_blood', this.playerBlood);
+    },
+    playerBone: function() {
+      storage.set('player_bone', this.playerBone);
+    }
+  }
 };
 </script>
 
 <style>
 .content {
   margin: 15px;
+}
+.badge {
+  margin-right: 15px;
 }
 </style>
