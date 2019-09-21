@@ -62,7 +62,6 @@ export default {
       map: 1,
       lastPlayerBlood: null,
       lastPlayerBone: null,
-      show: true,
     };
   },
   mounted() {
@@ -119,7 +118,7 @@ export default {
     },
     playerBone: function() {
       storage.set('player_bone', this.playerBone);
-    }
+    },
   }
 };
 </script>
