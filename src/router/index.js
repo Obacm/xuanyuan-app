@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '../components/Home'
-import Player from '../components/Player'
-import Boss from '../components/Boss'
+import Home from '../views/Home'
+import Player from '../views/Player'
+import Boss from '../views/Boss'
 
 Vue.use(Router)
 

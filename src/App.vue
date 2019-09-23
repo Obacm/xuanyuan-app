@@ -1,11 +1,18 @@
 <template>
   <div id="app">
     <router-view />
+    <view-back v-if="$route.path !== '/'"></view-back>
   </div>
 </template>
 
 <script>
-export default {};
+import ViewBack from './components/ViewBack'
+
+export default {
+  components: {
+    ViewBack
+  },
+};
 </script>
 
 <style>

@@ -26,12 +26,12 @@
         <b-badge variant="dark" class="badge animated flipInY" @click="setPlayerBone">{{ lastPlayerBone }}</b-badge>
       </b-form-group>
     </b-form>
-    <img class="back" src="../assets/img/back.png" @click="preView">
   </b-container>
 </template>
 
 <script>
 import { storage } from '../utils/storage'
+import { TweenLite } from 'gsap'
 
 export default {
   data() {
@@ -84,9 +84,6 @@ export default {
     setPlayerBone() {
       this.playerBone = this.lastPlayerBone;
     },
-    preView() {
-      this.$router.back();
-    }
   },
   computed: {
     playerDefense: function() {
