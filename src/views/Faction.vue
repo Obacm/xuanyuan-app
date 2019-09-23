@@ -26,7 +26,6 @@ export default {
       level: null,
       type: null,
       ability: null,
-      isClear: false,
     };
   },
   methods: {
@@ -40,7 +39,9 @@ export default {
       this.ability = key;
     },
     setClear() {
-      this.isClear = true;
+      this.level = null;
+      this.type = null;
+      this.ability = null;
     }
   },
   computed: {
