@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <view-back v-if="$route.path !== '/'"></view-back>
+    <view-back v-if="$router.path !== '/'"></view-back>
   </div>
 </template>
 
