@@ -10,6 +10,9 @@
         <b-badge variant="success" v-for="(ability, index) in abilities" :key="index" @click="setAbility(ability.key)">{{ ability.value }}</b-badge>
       </div>
       <div class="box">
+        <b-badge variant="success" v-for="(clas, index) in classes" :key="index" @click="setClass(clas.key)">{{ clas.value }}</b-badge>
+      </div>
+      <div class="box">
           <b-badge pill variant="light" class="box" v-for="(collection, index) in collections" :key="index">{{ collection.text }}</b-badge>
       </div>
       <div class="box-max">
@@ -26,6 +29,7 @@ export default {
       level: null,
       type: null,
       ability: null,
+      class: null,
     };
   },
   methods: {
@@ -38,15 +42,19 @@ export default {
     setAbility(key) {
       this.ability = key;
     },
+    setClass(key) {
+      this.class = key;
+    },
     setClear() {
       this.level = null;
       this.type = null;
       this.ability = null;
+      this.class = null;
     }
   },
   computed: {
     isCondition() {
-      return this.level > 0 || this.type || this.ability > 0
+      return this.level > 0 || this.type || this.ability > 0 || this.class > 0
     },
     levels() {
       return this.$store.getters.levels;
@@ -57,24 +65,41 @@ export default {
     abilities() {
       return this.$store.getters.abilities;
     },
+    classes() {
+      return this.$store.getters.classes;
+    },
     factions() {
       return this.$store.getters.factions;
     },
     collections() {
-        if (this.level > 0 && this.type && this.ability) {
+        if (this.level > 0 && this.type && this.ability && this.class) {
+          return this.factions.filter(item => item.level === this.level && item.type === this.type && item.ability === this.ability && item.class === this.class)
+        } else if(this.level > 0 && this.type && this.ability) {
           return this.factions.filter(item => item.level === this.level && item.type === this.type && item.ability === this.ability)
-        } else if(this.level > 0 && this.type) {
-          return this.factions.filter(item => item.level === this.level && item.type === this.type)
+        } else if(this.level > 0 && this.type && this.class) {
+          return this.factions.filter(item => item.level === this.level && item.type === this.type && item.class === this.class)
+        } else if(this.type && this.ability && this.class) {
+          return this.factions.filter(item => item.type === this.type && item.ability === this.ability && item.class === this.class)
         } else if(this.level > 0 && this.ability) {
           return this.factions.filter(item => item.level === this.level && item.ability === this.ability)
         } else if(this.type && this.ability) {
           return this.factions.filter(item => item.type === this.type && item.ability === this.ability)
+        } else if(this.level && this.class) {
+          return this.factions.filter(item => item.level === this.level && item.class === this.class)
+        } else if(this.level > 0 && this.type) {
+          return this.factions.filter(item => item.level === this.level && item.type === this.type)
+        } else if(this.type && this.class) {
+          return this.factions.filter(item => item.type === this.type && item.class === this.class)
+        } else if(this.ability && this.class) {
+          return this.factions.filter(item => item.ability === this.ability && item.class === this.class)
         }else if(this.level > 0) {
           return this.factions.filter(item => item.level === this.level)
         } else if(this.type) {
           return this.factions.filter(item => item.type === this.type)
         } else if(this.ability > 0) {
           return this.factions.filter(item => item.ability === this.ability)
+        } else if(this.class) {
+          return this.factions.filter(item => item.class === this.class)
         }else {
           return [];
         }
