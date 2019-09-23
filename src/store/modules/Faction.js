@@ -1,5 +1,5 @@
 const state = {
-  datum: [
+  factions: [
     { text: '点苍派', value: 1, level: 1, grade: 1, type: 1, pellet: 0, implement: 2, stunt: '', class: 3, skill: '寒冰诀', addition: 1, attribute: 3 },
     { text: '经脉殿', value: 2, level: 1, grade: 1, type: 0, pellet: 0, implement: 2, stunt: '', class: 3, skill: '裂石印', addition: 1, attribute: 5 },
     { text: '无极门', value: 3, level: 1, grade: 1, type: 1, pellet: 2, implement: 0, stunt: '', class: '', skill: '', addition: '', attribute: '' },
@@ -76,7 +76,7 @@ const state = {
 }
 
 const getters = {
-  datum: (state) => state.datum
+  factions: (state) => state.factions
 }
 
 export default {
