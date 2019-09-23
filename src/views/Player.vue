@@ -66,78 +66,78 @@ export default {
     },
   },
   computed: {
-    playerAttack: function() {
+    playerAttack() {
       if (this.playerGas > 0) {
         return this.playerGas * 5;
       }
       return 0;
     },
-    enemyAttack: function() {
+    enemyAttack() {
       if (this.enemyTotalHarm > 0 && this.enemyBone > 0) {
         return this.enemyTotalHarm - this.enemyBone * 4;
       }
       return 0;
     },
-    enemyBone: function() {
+    enemyBone() {
       if (this.playerBone > 0) {
         return this.enemyDefense / 5;
       }
       return 0;
     },
-    playerDefense: function() {
+    playerDefense() {
       if (this.playerBone > 0) {
         return this.playerBone * 5;
       }
       return 0;
     },
-    enemyDefense: function() {
+    enemyDefense() {
       if (this.playerTotalHarm > 0 && this.playerHarm > 0) {
         return this.playerTotalHarm - this.playerHarm;
       }
       return 0;
     },
-    playerTotalHarm: function() {
+    playerTotalHarm() {
       if (this.playerAttack > 0 && this.playerBone > 0) {
         return this.playerAttack + this.playerBone * 4;
       }
       return 0;
     },
-    enemyTotalHarm: function() {
+    enemyTotalHarm() {
       if (this.playerDefense > 0 && this.enemyHarm > 0) {
         return this.playerDefense + parseInt(this.enemyHarm);
       }
       return 0;
     },
-    animatedPlayerDefense: function() {
+    animatedPlayerDefense() {
       return this.tweenedPlayerDefense.toFixed(0);
     },
-    animatedEnemyDefense: function() {
+    animatedEnemyDefense() {
       return this.tweenedEnemyDefense.toFixed(0);
     },
-    animatedEnemyAttack: function() {
+    animatedEnemyAttack() {
       return this.tweenedEnemyAttack.toFixed(0);
     },
-    animatedPlayerTotalHarme: function() {
+    animatedPlayerTotalHarme() {
       return this.tweenedPlayerTotalHarme.toFixed(0);
     },
   },
   watch: {
-    playerGas: function() {
+    playerGas() {
       storage.set('_player_gas', this.playerGas);
     },
-    playerBone: function() {
+    playerBone() {
       storage.set('_player_bone', this.playerBone);
     },
-    playerDefense: function(newValue) {
+    playerDefense(newValue) {
       TweenLite.to(this.$data, 0.5, { tweenedPlayerDefense: newValue });
     },
-    enemyDefense: function(newValue) {
+    enemyDefense(newValue) {
       TweenLite.to(this.$data, 0.5, { tweenedEnemyDefense: newValue });
     },
-    enemyAttack: function(newValue) {
+    enemyAttack(newValue) {
       TweenLite.to(this.$data, 0.5, { tweenedEnemyAttack: newValue });
     },
-    playerTotalHarm: function(newValue) {
+    playerTotalHarm(newValue) {
       TweenLite.to(this.$data, 0.5, { tweenedPlayerTotalHarme: newValue });
     },
   }
