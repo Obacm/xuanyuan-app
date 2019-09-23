@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '../views/Home'
 import Player from '../views/Player'
 import Boss from '../views/Boss'
+import Faction from '../views/Faction'
 
 Vue.use(Router)
 
@@ -30,6 +31,14 @@ let routes = [
     name: 'Boss',
     meta: {
       title: '计量器_Boss'
+    }
+  },
+  {
+    path: '/faction',
+    component: Faction,
+    name: 'Faction',
+    meta: {
+      title: '计量器_门派'
     }
   },
 ]

@@ -5,9 +5,14 @@
         <b-button variant="primary">玩家</b-button>
       </router-link>
     </div>
-    <div class="boss">
+    <div class="box">
       <router-link to="/boss">
         <b-button variant="danger">怪物</b-button>
+      </router-link>
+    </div>
+    <div class="box">
+      <router-link to="/faction">
+        <b-button variant="warning">门派</b-button>
       </router-link>
     </div>
   </div>
@@ -23,7 +28,7 @@
 </script>
 
 <style>
-  .boss {
+  .box {
      margin-top: 20px;
   }
 </style>
