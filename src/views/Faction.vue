@@ -10,10 +10,19 @@
         <b-badge variant="success" v-for="(ability, index) in abilities" :key="index" @click="setAbility(ability.key)">{{ ability.value }}</b-badge>
       </div>
       <div class="box">
-        <b-badge variant="success" v-for="(clas, index) in classes" :key="index" @click="setClass(clas.key)">{{ clas.value }}</b-badge>
+        <b-badge variant="info" v-for="(clas, index) in classes" :key="index" @click="setClass(clas.key)">{{ clas.value }}</b-badge>
       </div>
       <div class="box">
-          <b-badge pill variant="light" class="box" v-for="(collection, index) in collections" :key="index">{{ collection.text }}</b-badge>
+        <b-badge pill variant="light" class="box" v-for="(collection, index) in collections" :key="index">{{ collection.text }}</b-badge>
+      </div>
+      <div class="box">
+        <b-badge href="#" variant="light">本次筛选条件</b-badge>
+      </div>
+      <div class="box">
+        <b-badge variant="primary">{{ currentLevel }}</b-badge>
+        <b-badge variant="dark">{{ currentType }}</b-badge>
+        <b-badge variant="success">{{ currentAbility }}</b-badge>
+        <b-badge variant="info">{{ currentClass }}</b-badge>
       </div>
       <div class="box-max">
         <b-button variant="primary" size="sm" @click="setClear" v-if="isCondition">清除筛选条件</b-button>
@@ -71,38 +80,87 @@ export default {
     factions() {
       return this.$store.getters.factions;
     },
+    currentLevel() {
+      if (this.level) {
+        return this.levels.filter(item => item.key === this.level).shift().value;
+      }
+    },
+    currentType() {
+      if (this.type) {
+        return this.types.filter(item => item.key === this.type).shift().value;
+      }
+    },
+    currentAbility() {
+      if (this.ability) {
+        return this.abilities.filter(item => item.key === this.ability).shift().value;
+      }
+    },
+    currentClass() {
+      if (this.class) {
+        return this.classes.filter(item => item.key === this.class).shift().value;
+      }
+    },
     collections() {
-        if (this.level > 0 && this.type && this.ability && this.class) {
-          return this.factions.filter(item => item.level === this.level && item.type === this.type && item.ability === this.ability && item.class === this.class)
-        } else if(this.level > 0 && this.type && this.ability) {
-          return this.factions.filter(item => item.level === this.level && item.type === this.type && item.ability === this.ability)
-        } else if(this.level > 0 && this.type && this.class) {
-          return this.factions.filter(item => item.level === this.level && item.type === this.type && item.class === this.class)
-        } else if(this.type && this.ability && this.class) {
-          return this.factions.filter(item => item.type === this.type && item.ability === this.ability && item.class === this.class)
-        } else if(this.level > 0 && this.ability) {
-          return this.factions.filter(item => item.level === this.level && item.ability === this.ability)
-        } else if(this.type && this.ability) {
-          return this.factions.filter(item => item.type === this.type && item.ability === this.ability)
-        } else if(this.level && this.class) {
-          return this.factions.filter(item => item.level === this.level && item.class === this.class)
-        } else if(this.level > 0 && this.type) {
-          return this.factions.filter(item => item.level === this.level && item.type === this.type)
-        } else if(this.type && this.class) {
-          return this.factions.filter(item => item.type === this.type && item.class === this.class)
-        } else if(this.ability && this.class) {
-          return this.factions.filter(item => item.ability === this.ability && item.class === this.class)
-        }else if(this.level > 0) {
-          return this.factions.filter(item => item.level === this.level)
-        } else if(this.type) {
-          return this.factions.filter(item => item.type === this.type)
-        } else if(this.ability > 0) {
-          return this.factions.filter(item => item.ability === this.ability)
-        } else if(this.class) {
-          return this.factions.filter(item => item.class === this.class)
-        }else {
-          return [];
-        }
+      if (this.level && this.type && this.ability && this.class) {
+        return this.factions.filter(item => item.level === this.level && item.type === this.type && item.ability === this.ability && item.class === this.class)
+      }
+      
+      if(this.level && this.type && this.ability) {
+        return this.factions.filter(item => item.level === this.level && item.type === this.type && item.ability === this.ability)
+      }
+      
+      if(this.level && this.type && this.class) {
+        return this.factions.filter(item => item.level === this.level && item.type === this.type && item.class === this.class)
+      }
+      
+      if(this.level && this.ability && this.class) {
+        return this.factions.filter(item => item.level === this.level && item.ability === this.ability && item.class === this.class)
+      }
+
+      if(this.type && this.ability && this.class) {
+        return this.factions.filter(item => item.type === this.type && item.ability === this.ability && item.class === this.class)
+      }
+      
+      if(this.level && this.ability) {
+        return this.factions.filter(item => item.level === this.level && item.ability === this.ability)
+      } 
+      
+      if(this.level && this.class) {
+        return this.factions.filter(item => item.level === this.level && item.class === this.class)
+      }
+      
+      if(this.level && this.type) {
+        return this.factions.filter(item => item.level === this.level && item.type === this.type)
+      }
+      
+      if(this.type && this.ability) {
+        return this.factions.filter(item => item.type === this.type && item.ability === this.ability)
+      }
+      if(this.type && this.class) {
+        return this.factions.filter(item => item.type === this.type && item.class === this.class)
+      }
+      
+      if(this.ability && this.class) {
+        return this.factions.filter(item => item.ability === this.ability && item.class === this.class)
+      }
+      
+      if(this.level) {
+        return this.factions.filter(item => item.level === this.level)
+      }
+      
+      if(this.type) {
+        return this.factions.filter(item => item.type === this.type)
+      }
+      
+      if(this.ability) {
+        return this.factions.filter(item => item.ability === this.ability)
+      }
+      
+      if(this.class) {
+        return this.factions.filter(item => item.class === this.class)
+      }
+      
+      return [];
     }
   },
 };
