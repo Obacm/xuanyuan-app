@@ -18,7 +18,7 @@
       <div class="box">
         <b-badge href="#" variant="light">本次筛选条件</b-badge>
       </div>
-      <div class="box">
+      <div>
         <b-badge variant="primary">{{ currentLevel }}</b-badge>
         <b-badge variant="dark">{{ currentType }}</b-badge>
         <b-badge variant="success">{{ currentAbility }}</b-badge>
@@ -84,21 +84,25 @@ export default {
       if (this.level) {
         return this.levels.filter(item => item.key === this.level).shift().value;
       }
+      return null;
     },
     currentType() {
       if (this.type) {
         return this.types.filter(item => item.key === this.type).shift().value;
       }
+      return null;
     },
     currentAbility() {
       if (this.ability) {
         return this.abilities.filter(item => item.key === this.ability).shift().value;
       }
+      return null;
     },
     currentClass() {
       if (this.class) {
         return this.classes.filter(item => item.key === this.class).shift().value;
       }
+      return null;
     },
     collections() {
       if (this.level && this.type && this.ability && this.class) {
