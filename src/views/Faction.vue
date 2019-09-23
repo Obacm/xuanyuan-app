@@ -13,7 +13,7 @@
         <b-badge variant="info" v-for="(clas, index) in classes" :key="index" @click="setClass(clas.key)">{{ clas.value }}</b-badge>
       </div>
       <div class="box">
-        <b-badge pill variant="light" class="box" v-for="(collection, index) in collections" :key="index">{{ collection.text }}</b-badge>
+        <b-badge pill variant="light" class="box animated" :class="{rubberBand:isAnimated}" v-for="(collection, index) in collections" :key="index">{{ collection.text }}</b-badge>
       </div>
       <div class="box">
         <b-badge href="#" variant="light">本次筛选条件</b-badge>
@@ -39,6 +39,7 @@ export default {
       type: null,
       ability: null,
       class: null,
+      isAnimated: true
     };
   },
   methods: {
@@ -167,6 +168,16 @@ export default {
       return [];
     }
   },
+  watch: {
+    collections(newValue, oldValue) {
+      this.isAnimated = false;
+      if (newValue !== oldValue) {
+        setTimeout(()=>{
+          this.isAnimated = true;
+        }, 100)
+      }
+    }
+  }
 };
 </script>
 
