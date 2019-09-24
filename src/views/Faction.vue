@@ -16,7 +16,10 @@
         <span v-for="(collection, index) in collections" :key="index">
           <b-badge pill variant="light" class="box animated" :id="`tooltip-${collection.value}`" :class="{rubberBand:isAnimated}">{{ collection.text }}</b-badge>
           <b-tooltip ref="tooltip" :target="`tooltip-${collection.value}`" v-if="collection.class === 3">
-            {{ collection.skill }} 
+            {{ collection.skill }}
+          </b-tooltip>
+          <b-tooltip ref="tooltip" placement="bottom" variant="warning" :target="`tooltip-${collection.value}`" v-if="collection.class === 3">
+            {{ getAttribute(collection.attribute, collection.addition) }}
           </b-tooltip>
           <b-tooltip ref="tooltip" :target="`tooltip-${collection.value}`" v-if="collection.class === 1 || collection.class === 2">
             {{ collection.stunt }}
@@ -50,7 +53,7 @@ export default {
       attribute: null,
       isAnimated: true,
       params: [],
-      paramsArray: []
+      paramsArray: [],
     };
   },
   methods: {
@@ -84,6 +87,19 @@ export default {
       this.ability = null;
       this.class = null;
       this.params = [];
+    },
+    getAttribute(attribute, addition) {
+      if (attribute instanceof Array) {
+        let attributeArray = attribute.map(element => {
+          return this.attributes.filter(item => item.value === element).shift();
+        });
+        
+        return attributeArray.map(element => {
+          return element.text + '*' + addition
+        }).join(' '); 
+      }
+      let attributeArray = this.attributes.filter(item => item.value === attribute).shift();
+      return attributeArray.text + '*' + addition
     },
   },
   computed: {
@@ -129,12 +145,6 @@ export default {
     currentClass() {
       if (this.class) {
         return this.classes.filter(item => item.key === this.class).shift().value;
-      }
-      return null;
-    },
-    currentAttribute() {
-      if (this.attribute) {
-        return this.attributes.filter(item => item.key === this.attribute).shift();
       }
       return null;
     },
