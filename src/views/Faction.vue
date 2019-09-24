@@ -1,16 +1,16 @@
 <template>
   <b-container fluid>
       <div>
-        <b-badge variant="primary" v-for="(level, index) in levels" :key="index" @click="setLevel(level.key)">{{ level.value }}</b-badge>
+        <b-badge variant="primary" v-for="(level, index) in levels" :key="index" @click="setLevelParams(level.key, 'level')">{{ level.value }}</b-badge>
       </div>
       <div class="box">
-        <b-badge variant="dark" v-for="(type, index) in types" :key="index" @click="setType(type.key)">{{ type.value }}</b-badge>
+        <b-badge variant="dark" v-for="(type, index) in types" :key="index" @click="setLevelParams(type.key, 'type')">{{ type.value }}</b-badge>
       </div>
       <div class="box">
-        <b-badge variant="success" v-for="(ability, index) in abilities" :key="index" @click="setAbility(ability.key)">{{ ability.value }}</b-badge>
+        <b-badge variant="success" v-for="(ability, index) in abilities" :key="index" @click="setLevelParams(ability.key, 'ability')">{{ ability.value }}</b-badge>
       </div>
       <div class="box">
-        <b-badge variant="info" v-for="(clas, index) in classes" :key="index" @click="setClass(clas.key)">{{ clas.value }}</b-badge>
+        <b-badge variant="info" v-for="(clas, index) in classes" :key="index" @click="setLevelParams(clas.key, 'class')">{{ clas.value }}</b-badge>
       </div>
       <div class="box">
         <span v-for="(collection, index) in collections" :key="index">
@@ -19,7 +19,7 @@
             {{ collection.skill }}
           </b-tooltip>
           <b-tooltip ref="tooltip" placement="bottom" variant="warning" :target="`tooltip-${collection.value}`" v-if="collection.class === 3">
-            {{ getAttribute(collection.attribute, collection.addition) }}
+            {{ setAttribute(collection.attribute, collection.addition) }}
           </b-tooltip>
           <b-tooltip ref="tooltip" :target="`tooltip-${collection.value}`" v-if="collection.class === 1 || collection.class === 2">
             {{ collection.stunt }}
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -57,28 +58,10 @@ export default {
     };
   },
   methods: {
-    setLevel(key) {
-      this.level = key;
-      if(this.params.indexOf('level') === -1) {
-        this.params.push('level');
-      }
-    },
-    setType(key) {
-      this.type = key;
-      if(this.params.indexOf('type') === -1) {
-        this.params.push('type');
-      }
-    },
-    setAbility(key) {
-      this.ability = key;
-      if(this.params.indexOf('ability') === -1) {
-        this.params.push('ability');
-      }
-    },
-    setClass(key) {
-      this.class = key;
+    setLevelParams(key, value) {
+      eval(`this.${value} = key`);
       if(this.params.indexOf('class') === -1) {
-        this.params.push('class');
+        this.params.push(value);
       }
     },
     setClear() {
@@ -88,7 +71,7 @@ export default {
       this.class = null;
       this.params = [];
     },
-    getAttribute(attribute, addition) {
+    setAttribute(attribute, addition) {
       if (attribute instanceof Array) {
         let attributeArray = attribute.map(element => {
           return this.attributes.filter(item => item.value === element).shift();
@@ -103,26 +86,16 @@ export default {
     },
   },
   computed: {
+    ...mapGetters([
+      'levels',
+      'types',
+      'abilities',
+      'classes',
+      'attributes',
+      'factions',
+    ]),
     isCondition() {
       return this.level > 0 || this.type || this.ability > 0 || this.class > 0
-    },
-    levels() {
-      return this.$store.getters.levels;
-    },
-    types() {
-      return this.$store.getters.types;
-    },
-    abilities() {
-      return this.$store.getters.abilities;
-    },
-    classes() {
-      return this.$store.getters.classes;
-    },
-    attributes() {
-      return this.$store.getters.attributes;
-    },
-    factions() {
-      return this.$store.getters.factions;
     },
     currentLevel() {
       if (this.level) {
