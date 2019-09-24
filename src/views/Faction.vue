@@ -139,7 +139,7 @@ export default {
   watch: {
     collections(newValue, oldValue) {
       if (newValue !== oldValue) {
-       this.isAnimated = false;
+        this.isAnimated = false;
         setTimeout(() => {
           this.isAnimated = true;
         }, 100)
