@@ -49,26 +49,41 @@ export default {
       class: null,
       attribute: null,
       isAnimated: true,
+      params: [],
+      paramsArray: []
     };
   },
   methods: {
     setLevel(key) {
       this.level = key;
+      if(this.params.indexOf('level') === -1) {
+        this.params.push('level');
+      }
     },
     setType(key) {
       this.type = key;
+      if(this.params.indexOf('type') === -1) {
+        this.params.push('type');
+      }
     },
     setAbility(key) {
       this.ability = key;
+      if(this.params.indexOf('ability') === -1) {
+        this.params.push('ability');
+      }
     },
     setClass(key) {
       this.class = key;
+      if(this.params.indexOf('class') === -1) {
+        this.params.push('class');
+      }
     },
     setClear() {
       this.level = null;
       this.type = null;
       this.ability = null;
       this.class = null;
+      this.params = [];
     },
   },
   computed: {
@@ -123,66 +138,20 @@ export default {
       }
       return null;
     },
+    paramsString() {
+      if (this.params instanceof Array) {
+        this.paramsArray = [];
+        this.params.forEach((element, index) => {
+          this.paramsArray.push(`item.${element} === this.${element}`);
+        });
+        return this.paramsArray.join(' && ');
+      }
+      return '';
+    },
     collections() {
-      if (this.level && this.type && this.ability && this.class) {
-        return this.factions.filter(item => item.level === this.level && item.type === this.type && item.ability === this.ability && item.class === this.class)
+      if (this.paramsString) {
+        return eval(`this.factions.filter(item => ${this.paramsString})`)
       }
-      
-      if(this.level && this.type && this.ability) {
-        return this.factions.filter(item => item.level === this.level && item.type === this.type && item.ability === this.ability)
-      }
-      
-      if(this.level && this.type && this.class) {
-        return this.factions.filter(item => item.level === this.level && item.type === this.type && item.class === this.class)
-      }
-      
-      if(this.level && this.ability && this.class) {
-        return this.factions.filter(item => item.level === this.level && item.ability === this.ability && item.class === this.class)
-      }
-
-      if(this.type && this.ability && this.class) {
-        return this.factions.filter(item => item.type === this.type && item.ability === this.ability && item.class === this.class)
-      }
-      
-      if(this.level && this.ability) {
-        return this.factions.filter(item => item.level === this.level && item.ability === this.ability)
-      } 
-      
-      if(this.level && this.class) {
-        return this.factions.filter(item => item.level === this.level && item.class === this.class)
-      }
-      
-      if(this.level && this.type) {
-        return this.factions.filter(item => item.level === this.level && item.type === this.type)
-      }
-      
-      if(this.type && this.ability) {
-        return this.factions.filter(item => item.type === this.type && item.ability === this.ability)
-      }
-      if(this.type && this.class) {
-        return this.factions.filter(item => item.type === this.type && item.class === this.class)
-      }
-      
-      if(this.ability && this.class) {
-        return this.factions.filter(item => item.ability === this.ability && item.class === this.class)
-      }
-      
-      if(this.level) {
-        return this.factions.filter(item => item.level === this.level)
-      }
-      
-      if(this.type) {
-        return this.factions.filter(item => item.type === this.type)
-      }
-      
-      if(this.ability) {
-        return this.factions.filter(item => item.ability === this.ability)
-      }
-      
-      if(this.class) {
-        return this.factions.filter(item => item.class === this.class)
-      }
-      
       return [];
     }
   },
@@ -190,7 +159,7 @@ export default {
     collections(newValue, oldValue) {
       if (newValue !== oldValue) {
        this.isAnimated = false;
-        setTimeout(()=>{
+        setTimeout(() => {
           this.isAnimated = true;
         }, 100)
       }
