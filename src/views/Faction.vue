@@ -13,7 +13,15 @@
         <b-badge variant="info" v-for="(clas, index) in classes" :key="index" @click="setClass(clas.key)">{{ clas.value }}</b-badge>
       </div>
       <div class="box">
-        <b-badge pill variant="light" class="box animated" :class="{rubberBand:isAnimated}" v-for="(collection, index) in collections" :key="index">{{ collection.text }}</b-badge>
+        <span v-for="(collection, index) in collections" :key="index">
+          <b-badge pill variant="light" class="box animated" :id="`tooltip-${collection.value}`" :class="{rubberBand:isAnimated}">{{ collection.text }}</b-badge>
+          <b-tooltip ref="tooltip" :target="`tooltip-${collection.value}`" v-if="collection.class === 3">
+            {{ collection.skill }} 
+          </b-tooltip>
+          <b-tooltip ref="tooltip" :target="`tooltip-${collection.value}`" v-if="collection.class === 1 || collection.class === 2">
+            {{ collection.stunt }}
+          </b-tooltip>
+        </span>
       </div>
       <div class="box">
         <b-badge href="#" variant="light">本次筛选条件</b-badge>
@@ -39,7 +47,8 @@ export default {
       type: null,
       ability: null,
       class: null,
-      isAnimated: true
+      attribute: null,
+      isAnimated: true,
     };
   },
   methods: {
@@ -60,7 +69,7 @@ export default {
       this.type = null;
       this.ability = null;
       this.class = null;
-    }
+    },
   },
   computed: {
     isCondition() {
@@ -77,6 +86,9 @@ export default {
     },
     classes() {
       return this.$store.getters.classes;
+    },
+    attributes() {
+      return this.$store.getters.attributes;
     },
     factions() {
       return this.$store.getters.factions;
@@ -102,6 +114,12 @@ export default {
     currentClass() {
       if (this.class) {
         return this.classes.filter(item => item.key === this.class).shift().value;
+      }
+      return null;
+    },
+    currentAttribute() {
+      if (this.attribute) {
+        return this.attributes.filter(item => item.key === this.attribute).shift();
       }
       return null;
     },
