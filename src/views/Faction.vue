@@ -25,7 +25,7 @@
         <b-badge variant="info">{{ currentClass }}</b-badge>
       </div>
       <div class="box-max">
-        <b-button variant="primary" size="sm" @click="setClear" v-if="isCondition">清除筛选条件</b-button>
+        <b-button variant="danger" size="sm" @click="setClear" v-if="isCondition">清除筛选条件</b-button>
       </div>
   </b-container>
 </template>
@@ -170,8 +170,8 @@ export default {
   },
   watch: {
     collections(newValue, oldValue) {
-      this.isAnimated = false;
       if (newValue !== oldValue) {
+       this.isAnimated = false;
         setTimeout(()=>{
           this.isAnimated = true;
         }, 100)

@@ -20,6 +20,7 @@ const state = {
   classes: [
     { key: 1, value: '绝学'},
     { key: 2, value: '残页'},
+    { key: 3, value: '招式'},
   ],
   factions: [
     { text: '点苍派', value: 1, level: 1, grade: 1, type: 1, ability: 2, pellet: 0, implement: 2, stunt: '', class: 3, skill: '寒冰诀', addition: 1, attribute: 3 },
