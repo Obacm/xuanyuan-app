@@ -140,11 +140,9 @@ export default {
     },
     paramsString() {
       if (this.params instanceof Array) {
-        this.paramsArray = [];
-        this.params.forEach((element, index) => {
-          this.paramsArray.push(`item.${element} === this.${element}`);
-        });
-        return this.paramsArray.join(' && ');
+        return this.params.map(element => {
+          return `item.${element} === this.${element}`;
+        }).join(' && ');
       }
       return '';
     },
