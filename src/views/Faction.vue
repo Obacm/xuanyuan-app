@@ -60,7 +60,7 @@ export default {
   methods: {
     setLevelParams(key, value) {
       eval(`this.${value} = key`);
-      if(this.params.indexOf('class') === -1) {
+      if(this.params.indexOf(value) === -1) {
         this.params.push(value);
       }
     },
