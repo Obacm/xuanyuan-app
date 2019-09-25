@@ -1,18 +1,8 @@
 <template>
   <div>
-    <div >
-      <router-link to="/player">
-        <b-button variant="primary">玩家</b-button>
-      </router-link>
-    </div>
-    <div class="box">
-      <router-link to="/boss">
-        <b-button variant="danger">怪物</b-button>
-      </router-link>
-    </div>
-    <div class="box">
-      <router-link to="/faction">
-        <b-button variant="warning">门派</b-button>
+    <div class="box" v-for="(route, index) in routes" :key="index">
+      <router-link :to="route.path" v-if="route.meta.display">
+        <b-button :variant="route.meta.variant">{{ route.name }}</b-button>
       </router-link>
     </div>
   </div>
@@ -22,7 +12,11 @@
   export default {
     data() {
       return {
+        routes: []
       }
+    },
+    mounted() {
+      this.routes = this.$router.options.routes;
     }
   }
 </script>

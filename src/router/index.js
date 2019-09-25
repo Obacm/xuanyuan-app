@@ -5,6 +5,7 @@ import Home from '../views/Home'
 import Player from '../views/Player'
 import Boss from '../views/Boss'
 import Faction from '../views/Faction'
+import Grade from '../views/Grade'
 
 Vue.use(Router)
 
@@ -12,33 +13,51 @@ let routes = [
   {
     path: '/',
     component: Home,
-    name: 'Home',
+    name: '首页',
     meta: {
-      title: '玄元剑仙_计量器'
+      title: '玄元剑仙_计量器',
+      variant: '',
+      display: false,
     }
   },
   {
     path: '/player',
     component: Player,
-    name: 'Player',
+    name: '玩家',
     meta: {
-      title: '计量器_玩家'
+      title: '计量器_玩家',
+      variant: 'primary',
+      display: true,
     }
   },
   {
     path: '/boss',
     component: Boss,
-    name: 'Boss',
+    name: '怪物',
     meta: {
-      title: '计量器_Boss'
+      title: '计量器_Boss',
+      variant: 'danger',
+      display: true,
     }
   },
   {
     path: '/faction',
     component: Faction,
-    name: 'Faction',
+    name: '门派',
     meta: {
-      title: '计量器_门派'
+      title: '计量器_门派',
+      variant: 'warning',
+      display: true,
+    }
+  },
+  {
+    path: '/grade',
+    component: Grade,
+    name: '境界',
+    meta: {
+      title: '计量器_境界',
+      variant: 'info',
+      display: true,
     }
   },
 ]
