@@ -15,6 +15,9 @@ const state = {
     { text: '太乙', value: 13},
     { text: '大罗', value: 14},
   ],
+  nodes: [
+    1, 2, 3, 4, 5, 6, 7 , 8, 9, 10
+  ],
   magics: [
     { text: '开光一', value: 1, grade: 1, exp: 10, min: 1, max: 5 },
     { text: '开光二', value: 2, grade: 1, exp: 60, min: 3, max: 8 },
@@ -234,6 +237,7 @@ const state = {
 
 const getters = {
   grades: (state) => state.grades,
+  nodes: (state) => state.nodes,
   magics: (state) => state.magics,
   gods: (state) => state.gods,
 }
