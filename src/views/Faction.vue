@@ -14,7 +14,7 @@
       </div>
       <div class="box">
         <span v-for="(collection, index) in collections" :key="index">
-          <b-badge pill variant="light" class="box animated" :id="`tooltip-${collection.value}`" :class="{rubberBand:isAnimated}">{{ collection.text }}</b-badge>
+          <b-badge pill variant="light" class="box animated" :id="`tooltip-${collection.value}`" :class="{rubberBand: isAnimated}">{{ collection.text }}</b-badge>
           <b-tooltip ref="tooltip" :target="`tooltip-${collection.value}`" v-if="collection.class === 3">
             {{ collection.skill }}
           </b-tooltip>
