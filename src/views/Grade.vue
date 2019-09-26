@@ -1,41 +1,52 @@
 <template>
   <b-container>
     <div class="box">
-      <b-badge variant="dark">当前境界</b-badge>
+      <b-badge variant="dark">境界</b-badge>
     </div>
     <div class="box">
-      <span class="badge badge-pill" :class="currentGrade === grade.value ? 'badge-primary': 'badge-light'" v-for="(grade, index) in grades" :key="index" @click="setGrade(grade.value)">{{ grade.text }}</span>
+      <span class="badge badge-pill" :class="meGrade === grade.value ? 'badge-primary': 'badge-light'" v-for="(grade, index) in grades" :key="index" @click="setGrade(grade.value)">{{ grade.text }}</span>
     </div>
     <div class="box">
-      <b-badge variant="dark">当前等级</b-badge>
+      <b-badge variant="dark">等级</b-badge>
     </div>
     <div class="box">
-      <span class="badge mr-2" :class="currentNode === node.value ? 'badge-primary': 'badge-light'" v-for="(node, index) in nodes" :key="index" @click="setNode(node.value)">{{ node.text }}</span>
+      <span class="badge mr-2" :class="meNode === node.value ? 'badge-primary': 'badge-light'" v-for="(node, index) in nodes" :key="index" @click="setNode(node.value)">{{ node.text }}</span>
     </div>
     <div class="box">
-      <b-badge variant="dark">当前悟性</b-badge>
+      <b-badge variant="dark">悟性</b-badge>
     </div>
     <div class="box">
       <div class="m-4">
-        <b-form-input v-model="currentPowerWan" type="range" min=0 max=100000 step=10000></b-form-input>
-        <b-form-input v-model="currentPowerQian" type="range" min=0 max=10000 step=1000></b-form-input>
-        <b-form-input v-model="currentPowerBai" type="range" min=0 max=1000 step=100></b-form-input>
-        <b-form-input v-model="currentPowerShi" type="range" min=0 max=100 step=10></b-form-input>
-        <b-form-input v-model="currentPowerGe" type="range" min=0 max=10 step=1></b-form-input>
-        <b-badge variant="light">{{ currentPower }}</b-badge>
+        <b-form-input v-model="currentPower"></b-form-input>
       </div>
     </div>
     <div class="box">
-      <b-button variant="primary" id="tooltip-target" @click="goNext">下一步</b-button>
-      <b-tooltip target="tooltip-target" triggers="hover" v-if="!gradeOver">
-        当前境界
-      </b-tooltip>
-      <b-tooltip target="tooltip-target" triggers="hover" v-if="!nodeOver">
-        当前等级
-      </b-tooltip>
-      <b-tooltip target="tooltip-target" triggers="hover" v-if="!powerOver">
-        当前悟性
-      </b-tooltip>
+      <b-badge variant="info">当前条件</b-badge>
+    </div>
+    <div>
+      <b-badge variant="light">{{ currentMagic ? currentMagic.text : ''}}</b-badge>
+      <b-badge variant="light">{{ currentPower }}</b-badge>
+    </div>
+    <div class="box">
+      <b-badge variant="success">修为</b-badge>
+    </div>
+    <div>
+      <div>
+        <b-badge variant="warning">不练功</b-badge>
+        <b-badge pill variant="light">{{ exp }}</b-badge>
+      </div>
+      <div>
+        <b-badge variant="warning">普练功</b-badge>
+        <b-badge pill variant="light">{{ goodExp }}</b-badge>
+      </div>
+      <div>
+        <b-badge variant="warning">掌练功</b-badge>
+        <b-badge pill variant="light">{{ betterExp }}</b-badge>
+      </div>
+      <div>
+        <b-badge variant="warning">掌传功</b-badge>
+        <b-badge pill variant="light">{{ bestExp }}</b-badge>
+      </div>
     </div>
   </b-container>
 </template>
@@ -47,33 +58,19 @@ export default {
   data() {
     return {
       type: 1,
-      currentGrade: 1,
-      currentNode: 1,
-      currentPowerWan: 0,
-      currentPowerQian: 0,
-      currentPowerBai: 0,
-      currentPowerShi: 0,
-      currentPowerGe: 0,
-      options: [
-        { text: '境界', value: 1 },
-        { text: '肉身', value: 2 },
-      ],
+      meGrade: 1,
+      meNode: 1,
+      currentPower: 0,
+      time: 5,
     };
   },
   methods: {
     setGrade(value) {
-      this.currentGrade = value;
+      this.meGrade = value;
     },
     setNode(value) {
-      this.currentNode = value;
+      this.meNode = value;
     },
-    goNext() {
-      if (this.currentGrade && this.currentNode && this.powerOver) {
-        return true;
-      } else {
-        return false;
-      }
-    }
   },
   computed: {
     ...mapGetters([
@@ -82,18 +79,63 @@ export default {
       'magics',
       'gods'
     ]),
-    gradeOver() {
-      return this.currentGrade > 0;
+    currentGrade() {
+      return this.grades.filter(item => item.value === this.meGrade).shift();
     },
-    nodeOver() {
-      return this.currentNode > 0;
+    currentNode() {
+      return this.nodes.filter(item => item.value === this.meNode).shift();
     },
-    powerOver() {
-      return parseInt(this.currentPower) > 0;
+    currentMagic() {
+      return this.magics.filter(item => item.grade === this.meGrade && item.node === this.meNode).shift();
     },
-    currentPower() {
-      return parseInt(this.currentPowerWan) + parseInt(this.currentPowerQian) + parseInt(this.currentPowerBai) + parseInt(this.currentPowerShi) + parseInt(this.currentPowerGe);
-    }
+    currentPowerRate() {
+      return this.currentPower / 2;
+    },
+    currentMagicMinRate() {
+      return this.currentMagic.min;
+    },
+    currentMagicMaxRate() {
+      return this.currentMagic.max;
+    },
+    currentMagicAvgRate() {
+      return (this.currentMagicMinRate + this.currentMagicMaxRate) / 2;
+    },
+    currentRate() {
+      return this.currentPowerRate + this.currentMagicAvgRate;
+    },
+    currentMinRate() {
+      return this.currentPowerRate + this.currentMagicMinRate;
+    },
+    currentMaxRate() {
+      return this.currentPowerRate + this.currentMagicMaxRate;
+    },
+    exp() {
+      return this.currentRate * this.times;
+    },
+    goodExp() {
+      return this.currentRate * 5 * this.passGoodTimes + this.currentRate * (this.times - this.passGoodTimes);
+    },
+    betterExp() {
+      return this.currentRate * 5 * this.passBetterTimes + this.currentRate * (this.times - this.passBetterTimes);
+    },
+    bestExp() {
+      return this.currentRate * 8 * this.passBestTimes + this.currentRate * (this.times - this.passBestTimes);
+    },
+    duration() {
+      return 24 * 60 * 60;
+    },
+    times() {
+      return this.duration / this.time;
+    },
+    passGoodTimes() {
+      return 2.5 * 60 * 60 / this.time;
+    },
+    passBetterTimes() {
+      return 2.5 * 60 * 60 * 2 / this.time;
+    },
+    passBestTimes() {
+      return 2.5 * 60 * 60 / this.time;
+    },
   },
   watch: {
     
