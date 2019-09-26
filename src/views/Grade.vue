@@ -21,6 +21,13 @@
       </div>
     </div>
     <div class="box">
+      <b-badge variant="dark">方式</b-badge>
+    </div>
+    <div class="box">
+      <b-form-radio-group v-model="passType" :options="passOptions" size="50"></b-form-radio-group>
+      <b-form-checkbox-group v-model="isPass" :options="options"></b-form-checkbox-group>
+    </div>
+    <div class="box">
       <b-badge variant="info">当前条件</b-badge>
     </div>
     <div>
@@ -28,25 +35,8 @@
       <b-badge variant="light">{{ currentPower }}</b-badge>
     </div>
     <div class="box">
-      <b-badge variant="success">修为</b-badge>
-    </div>
-    <div>
-      <div>
-        <b-badge variant="warning">不练功</b-badge>
-        <b-badge pill variant="light">{{ exp }}</b-badge>
-      </div>
-      <div>
-        <b-badge variant="warning">普练功</b-badge>
-        <b-badge pill variant="light">{{ goodExp }}</b-badge>
-      </div>
-      <div>
-        <b-badge variant="warning">掌练功</b-badge>
-        <b-badge pill variant="light">{{ betterExp }}</b-badge>
-      </div>
-      <div>
-        <b-badge variant="warning">掌传功</b-badge>
-        <b-badge pill variant="light">{{ bestExp }}</b-badge>
-      </div>
+      <b-badge variant="warning">总修为</b-badge>
+      <b-badge pill variant="light">{{ totalExp }}</b-badge>
     </div>
   </b-container>
 </template>
@@ -62,6 +52,16 @@ export default {
       meNode: 1,
       currentPower: 0,
       time: 5,
+      passType: 0,
+      isPass: false,
+      passOptions: [
+        { text: '不练功', value: 0 },
+        { text: '普练功', value: 1 },
+        { text: '掌练功', value: 2 },
+      ],
+      options: [
+        { text: '掌传功', value: 3 },
+      ]
     };
   },
   methods: {
@@ -113,13 +113,42 @@ export default {
       return this.currentRate * this.times;
     },
     goodExp() {
-      return this.currentRate * 5 * this.passGoodTimes + this.currentRate * (this.times - this.passGoodTimes);
+      return this.currentRate * 5 * this.passGoodTimes;
     },
     betterExp() {
-      return this.currentRate * 5 * this.passBetterTimes + this.currentRate * (this.times - this.passBetterTimes);
+      return this.currentRate * 5 * this.passBetterTimes;
     },
     bestExp() {
-      return this.currentRate * 8 * this.passBestTimes + this.currentRate * (this.times - this.passBestTimes);
+      return this.currentRate * 8 * this.passBestTimes;
+    },
+    totalExp() {
+      if (this.isPass) {
+        if (this.passType === 0) {
+          return this.bestExp + this.currentRate * (this.times - this.passBestTimes);
+        }
+
+        if (this.passType === 1) {
+          return this.goodExp + this.bestExp + this.currentRate * (this.times - this.passGoodTimes);
+        }
+
+        if (this.passType === 2) {
+          return this.betterExp + this.bestExp + this.currentRate * (this.times - this.passBetterTimes);
+        }
+      } else {
+        if (this.passType === 0) {
+          return this.exp;
+        }
+
+        if (this.passType === 1) {
+          return this.goodExp + this.currentRate * (this.times - this.passGoodTimes);
+        }
+
+        if (this.passType === 2) {
+          return this.betterExp + this.currentRate * (this.times - this.passBetterTimes);
+        }
+      }
+
+      return 0;
     },
     duration() {
       return 24 * 60 * 60;
