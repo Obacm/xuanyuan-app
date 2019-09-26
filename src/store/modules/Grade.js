@@ -16,7 +16,16 @@ const state = {
     { text: '大罗', value: 14},
   ],
   nodes: [
-    1, 2, 3, 4, 5, 6, 7 , 8, 9, 10
+    { text: '一', value: 1},
+    { text: '二', value: 2},
+    { text: '三', value: 3},
+    { text: '四', value: 4},
+    { text: '五', value: 5},
+    { text: '六', value: 6},
+    { text: '七', value: 7},
+    { text: '八', value: 8},
+    { text: '九', value: 9},
+    { text: '十', value: 10},
   ],
   magics: [
     { text: '开光一', value: 1, level: 1, grade: 1, exp: 10, min: 1, max: 5 },

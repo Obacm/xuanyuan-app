@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid>
+  <b-container>
     <div class="box">
       <b-badge variant="dark">当前境界</b-badge>
     </div>
@@ -10,7 +10,7 @@
       <b-badge variant="dark">当前等级</b-badge>
     </div>
     <div class="box">
-      <span class="badge" :class="currentNode === node ? 'badge-primary': 'badge-light'" v-for="(node, index) in nodes" :key="index" @click="setNode(node)">{{ node }}</span>
+      <span class="badge mr-2" :class="currentNode === node.value ? 'badge-primary': 'badge-light'" v-for="(node, index) in nodes" :key="index" @click="setNode(node.value)">{{ node.text }}</span>
     </div>
     <div class="box">
       <b-badge variant="dark">当前悟性</b-badge>
@@ -22,9 +22,7 @@
         <b-form-input v-model="currentPowerBai" type="range" min=0 max=1000 step=100></b-form-input>
         <b-form-input v-model="currentPowerShi" type="range" min=0 max=100 step=10></b-form-input>
         <b-form-input v-model="currentPowerGe" type="range" min=0 max=10 step=1></b-form-input>
-        <div class="mt-2">
-          <b-badge href="#" variant="light">{{ currentPower }}</b-badge>
-        </div>
+        <b-badge variant="light">{{ currentPower }}</b-badge>
       </div>
     </div>
     <div class="box">
