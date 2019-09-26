@@ -24,7 +24,7 @@
       <b-badge variant="dark">方式</b-badge>
     </div>
     <div class="box">
-      <b-form-radio-group v-model="passType" :options="passOptions" size="50"></b-form-radio-group>
+      <b-form-radio-group v-model="passType" :options="passOptions"></b-form-radio-group>
       <b-form-checkbox v-model="isPass">掌传功</b-form-checkbox>
     </div>
     <div class="box">
