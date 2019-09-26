@@ -150,13 +150,13 @@ const state = {
     { text: '玄仙十', value: 110, node: 10, grade: 11, exp: 9764236800, min: 7435, max: 22305 },
 
     { text: '天仙一', value: 111, node: 1, grade: 12, exp: 10485504000, min: 7585, max: 22755 },
-    { text: '天仙二', value: 112, node: 2, grade: 12, exp: 0, min: 0, max: 0 },
-    { text: '天仙三', value: 113, node: 3, grade: 12, exp: 0, min: 0, max: 0 },
-    { text: '天仙四', value: 114, node: 4, grade: 12, exp: 0, min: 0, max: 0 },
-    { text: '天仙五', value: 115, node: 5, grade: 12, exp: 0, min: 0, max: 0 },
+    { text: '天仙二', value: 112, node: 2, grade: 12, exp: 12031804800, min: 7737, max: 23210 },
+    { text: '天仙三', value: 113, node: 3, grade: 12, exp: 13633056000, min: 7890, max: 23669 },
+    { text: '天仙四', value: 114, node: 4, grade: 12, exp: 15290035200, min: 8044, max: 24132 },
+    { text: '天仙五', value: 115, node: 5, grade: 12, exp: 0, min: 0, max: 0 }, 
     { text: '天仙六', value: 116, node: 6, grade: 12, exp: 0, min: 0, max: 0 },
     { text: '天仙七', value: 117, node: 7, grade: 12, exp: 0, min: 0, max: 0 },
-    { text: '天仙八', value: 118, node: 8, grade: 12, exp: 0, min: 0, max: 0 },
+    { text: '天仙八', value: 118, node: 8, grade: 12, exp: 22490784000, min: 8677, max: 26031 },
     { text: '天仙九', value: 119, node: 9, grade: 12, exp: 0, min: 0, max: 0 },
     { text: '天仙十', value: 120, node: 10, grade: 12, exp: 0, min: 0, max: 0 },
 

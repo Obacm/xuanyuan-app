@@ -25,7 +25,7 @@
     </div>
     <div class="box">
       <b-form-radio-group v-model="passType" :options="passOptions" size="50"></b-form-radio-group>
-      <b-form-checkbox-group v-model="isPass" :options="options"></b-form-checkbox-group>
+      <b-form-checkbox v-model="isPass">掌传功</b-form-checkbox>
     </div>
     <div class="box">
       <b-badge variant="info">当前条件</b-badge>
@@ -59,9 +59,6 @@ export default {
         { text: '普练功', value: 1 },
         { text: '掌练功', value: 2 },
       ],
-      options: [
-        { text: '掌传功', value: 3 },
-      ]
     };
   },
   methods: {
