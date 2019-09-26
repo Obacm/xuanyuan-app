@@ -28,13 +28,6 @@
       <b-form-checkbox v-model="isPass">掌传功</b-form-checkbox>
     </div>
     <div class="box">
-      <b-badge variant="info">当前条件</b-badge>
-    </div>
-    <div>
-      <b-badge variant="light">{{ currentMagic ? currentMagic.text : ''}}</b-badge>
-      <b-badge variant="light">{{ currentPower }}</b-badge>
-    </div>
-    <div class="box">
       <b-badge variant="warning">总修为</b-badge>
       <b-badge pill variant="light">{{ totalExp }}</b-badge>
     </div>
