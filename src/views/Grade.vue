@@ -17,7 +17,7 @@
     </div>
     <div class="box">
       <div class="m-4">
-        <b-form-input v-model="currentPower"></b-form-input>
+        <b-form-input v-model="currentPower" type="number"></b-form-input>
       </div>
     </div>
     <div class="box">
