@@ -6,6 +6,7 @@ import Player from '../views/Player'
 import Boss from '../views/Boss'
 import Faction from '../views/Faction'
 import Grade from '../views/Grade'
+import Skill from '../views/Skill'
 
 Vue.use(Router)
 
@@ -57,6 +58,16 @@ let routes = [
     meta: {
       title: '计量器_境界',
       variant: 'info',
+      display: true,
+    }
+  },
+  {
+    path: '/skill',
+    component: Skill,
+    name: '功法',
+    meta: {
+      title: '计量器_功法',
+      variant: 'dark',
       display: true,
     }
   },
