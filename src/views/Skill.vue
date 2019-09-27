@@ -13,10 +13,16 @@
       <span class="badge mr-2" :class="level === item.value ? 'badge-primary': 'badge-light'" v-for="(item, index) in nodes" :key="index" @click="setLevel(item.value)">{{ item.text }}</span>
     </div>
     <div class="box">
-      <b-badge variant="dark">灵根等级</b-badge>
+      <b-badge variant="dark">灵根等阶</b-badge>
     </div>
     <div class="box">
       <span class="badge mr-2" :class="power === item.value ? 'badge-primary': 'badge-light'" v-for="(item, index) in powers" :key="index" @click="setPower(item.value)">{{ item.text }}</span>
+    </div>
+     <div class="box">
+      <b-badge variant="dark">灵根等级</b-badge>
+    </div>
+    <div class="box">
+      <span class="badge mr-2" :class="powerLevel === item.value ? 'badge-primary': 'badge-light'" v-for="(item, index) in nodes" :key="index" @click="setPowerLevel(item.value)">{{ item.text }}</span>
     </div>
     <div class="box">
       <b-badge variant="dark">功法属性</b-badge>
@@ -52,6 +58,7 @@ export default {
       level: 1,
       power: 1,
       category: 0,
+      powerLevel: 1,
       isAnimated: true,
     };
   },
@@ -65,6 +72,12 @@ export default {
       setCategory(value) {
         this.category = value;
       },
+      setPowerLevel(value) {
+        this.powerLevel = value;
+      },
+      powerAddition(ladder) {
+        return this.powerAttribute * ladder;
+      }
   },
   computed: {
     ...mapGetters([
@@ -92,7 +105,7 @@ export default {
       if (this.collections instanceof Array) {
         return this.collections.map(element => ({
           ...element,
-          addition: element.addition + this.level - 1
+          addition: element.addition + this.powerAddition(element.ladder) + this.level - 1
         }));
       }
 
@@ -124,6 +137,9 @@ export default {
       }
 
       return 0;
+    },
+    powerAttribute() {
+      return ((this.power - 1) * 10 + this.powerLevel) * 2;
     },
   },
   watch: {
