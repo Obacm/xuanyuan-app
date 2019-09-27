@@ -95,6 +95,8 @@ export default {
           addition: element.addition + this.level - 1
         }));
       }
+
+      return 0;
     },
     totalAttribute() {
       let sum = 0;
