@@ -77,10 +77,9 @@ export default {
           return this.attributes.filter(item => item.value === element).shift();
         });
         
-        return attributeArray.map(element => ({
-          ...element,
-          text: element.text + '*' + addition
-        })).join(' '); 
+        return attributeArray.map(element => {
+          return element.text + '*' + addition
+        }).join(' '); 
       }
       let attributeArray = this.attributes.filter(item => item.value === attribute).shift();
       return attributeArray.text + '*' + addition
