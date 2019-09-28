@@ -61,7 +61,6 @@ const state = {
     { text: '锁心', value: 49, ladder: 5, attribute: 4, addition: 86 },
     { text: '玄冰', value: 50, ladder: 5, attribute: 3, addition: 86 },
 
-
     { text: '天罗', value: 51, ladder: 6, attribute: 1, addition: 155 },
     { text: '云海', value: 52, ladder: 6, attribute: 2, addition: 165 },
     { text: '静虚', value: 53, ladder: 6, attribute: 3, addition: 175 },
