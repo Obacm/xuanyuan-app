@@ -4,13 +4,25 @@
       <b-badge variant="dark">境界</b-badge>
     </div>
     <div class="box">
-      <span class="badge badge-pill" :class="meGrade === grade.value ? 'badge-primary': 'badge-light'" v-for="(grade, index) in grades" :key="index" @click="setGrade(grade.value)">{{ grade.text }}</span>
+      <span
+        class="badge badge-pill"
+        :class="meGrade === grade.value ? 'badge-primary': 'badge-light'"
+        v-for="(grade, index) in grades"
+        :key="index"
+        @click="setGrade(grade.value)"
+      >{{ grade.text }}</span>
     </div>
     <div class="box">
       <b-badge variant="dark">等级</b-badge>
     </div>
     <div class="box">
-      <span class="badge mr-2" :class="meNode === node.value ? 'badge-primary': 'badge-light'" v-for="(node, index) in nodes" :key="index" @click="setNode(node.value)">{{ node.text }}</span>
+      <span
+        class="badge mr-2"
+        :class="meNode === node.value ? 'badge-primary': 'badge-light'"
+        v-for="(node, index) in nodes"
+        :key="index"
+        @click="setNode(node.value)"
+      >{{ node.text }}</span>
     </div>
     <div class="box">
       <b-badge variant="dark">悟性</b-badge>
@@ -35,7 +47,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -48,10 +60,10 @@ export default {
       passType: 0,
       isPass: false,
       passOptions: [
-        { text: '不练功', value: 0 },
-        { text: '普练功', value: 1 },
-        { text: '掌练功', value: 2 },
-      ],
+        { text: "不练功", value: 0 },
+        { text: "普练功", value: 1 },
+        { text: "掌练功", value: 2 }
+      ]
     };
   },
   methods: {
@@ -60,14 +72,14 @@ export default {
     },
     setNode(value) {
       this.meNode = value;
-    },
+    }
   },
   computed: {
     ...mapGetters([
-      'grades',
-      'nodes',
-      'magics',
-      'gods'
+      "grades",
+      "nodes",
+      "magics",
+      "gods"
     ]),
     currentGrade() {
       return this.grades.filter(item => item.value === this.meGrade).shift();
@@ -76,7 +88,11 @@ export default {
       return this.nodes.filter(item => item.value === this.meNode).shift();
     },
     currentMagic() {
-      return this.magics.filter(item => item.grade === this.meGrade && item.node === this.meNode).shift();
+      return this.magics
+        .filter(
+          item => item.grade === this.meGrade && item.node === this.meNode
+        )
+        .shift();
     },
     currentPowerRate() {
       return this.currentPower / 2;
@@ -114,15 +130,25 @@ export default {
     totalExp() {
       if (this.isPass) {
         if (this.passType === 0) {
-          return this.bestExp + this.currentRate * (this.times - this.passBestTimes);
+          return (
+            this.bestExp + this.currentRate * (this.times - this.passBestTimes)
+          );
         }
 
         if (this.passType === 1) {
-          return this.goodExp + this.bestExp + this.currentRate * (this.times - this.passGoodTimes);
+          return (
+            this.goodExp +
+            this.bestExp +
+            this.currentRate * (this.times - this.passGoodTimes)
+          );
         }
 
         if (this.passType === 2) {
-          return this.betterExp + this.bestExp + this.currentRate * (this.times - this.passBetterTimes);
+          return (
+            this.betterExp +
+            this.bestExp +
+            this.currentRate * (this.times - this.passBetterTimes)
+          );
         }
       } else {
         if (this.passType === 0) {
@@ -130,11 +156,16 @@ export default {
         }
 
         if (this.passType === 1) {
-          return this.goodExp + this.currentRate * (this.times - this.passGoodTimes);
+          return (
+            this.goodExp + this.currentRate * (this.times - this.passGoodTimes)
+          );
         }
 
         if (this.passType === 2) {
-          return this.betterExp + this.currentRate * (this.times - this.passBetterTimes);
+          return (
+            this.betterExp +
+            this.currentRate * (this.times - this.passBetterTimes)
+          );
         }
       }
 
@@ -147,18 +178,16 @@ export default {
       return this.duration / this.time;
     },
     passGoodTimes() {
-      return 2.5 * 60 * 60 / this.time;
+      return (2.5 * 60 * 60) / this.time;
     },
     passBetterTimes() {
-      return 2.5 * 60 * 60 * 2 / this.time;
+      return (2.5 * 60 * 60 * 2) / this.time;
     },
     passBestTimes() {
-      return 2.5 * 60 * 60 / this.time;
-    },
+      return (2.5 * 60 * 60) / this.time;
+    }
   },
-  watch: {
-    
-  }
+  watch: {}
 };
 </script>
 

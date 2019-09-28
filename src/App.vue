@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import ViewBack from './components/ViewBack'
+import ViewBack from "./components/ViewBack";
 
 export default {
   components: {
     ViewBack
-  },
+  }
 };
 </script>
 

@@ -9,20 +9,20 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        routes: []
-      }
-    },
-    mounted() {
-      this.routes = this.$router.options.routes;
-    }
+export default {
+  data() {
+    return {
+      routes: []
+    };
+  },
+  mounted() {
+    this.routes = this.$router.options.routes;
   }
+};
 </script>
 
 <style>
-  .box {
-     margin-top: 20px;
-  }
+.box {
+  margin-top: 20px;
+}
 </style>

@@ -23,16 +23,24 @@
         <b-badge href="#" variant="light">上次输入的数据</b-badge>
       </b-form-group>
       <b-form-group>
-        <b-badge variant="primary" class="badge animated flipInX" @click="setPlayerGas">{{ lastPlayerGas }}</b-badge>
-        <b-badge variant="dark" class="badge animated flipInY" @click="setPlayerBone">{{ lastPlayerBone }}</b-badge>
+        <b-badge
+          variant="primary"
+          class="badge animated flipInX"
+          @click="setPlayerGas"
+        >{{ lastPlayerGas }}</b-badge>
+        <b-badge
+          variant="dark"
+          class="badge animated flipInY"
+          @click="setPlayerBone"
+        >{{ lastPlayerBone }}</b-badge>
       </b-form-group>
     </b-form>
   </b-container>
 </template>
 
 <script>
-import { storage } from '../utils/storage'
-import { TweenLite } from 'gsap'
+import { storage } from "../utils/storage";
+import { TweenLite } from "gsap";
 
 export default {
   data() {
@@ -46,12 +54,12 @@ export default {
       tweenedPlayerDefense: 0,
       tweenedEnemyDefense: 0,
       tweenedEnemyAttack: 0,
-      tweenedPlayerTotalHarme: 0,
+      tweenedPlayerTotalHarme: 0
     };
   },
   mounted() {
-    this.lastPlayerGas = storage.get('_player_gas');
-    this.lastPlayerBone = storage.get('_player_bone');
+    this.lastPlayerGas = storage.get("_player_gas");
+    this.lastPlayerBone = storage.get("_player_bone");
     TweenLite.to(this.$data, 0.5, { tweenedPlayerDefense: this.playerDefense });
     TweenLite.to(this.$data, 0.5, { tweenedEnemyDefense: this.enemyDefense });
     TweenLite.to(this.$data, 0.5, { tweenedEnemyAttack: this.enemyAttack });
@@ -63,7 +71,7 @@ export default {
     },
     setPlayerBone() {
       this.playerBone = this.lastPlayerBone;
-    },
+    }
   },
   computed: {
     playerAttack() {
@@ -119,14 +127,14 @@ export default {
     },
     animatedPlayerTotalHarme() {
       return this.tweenedPlayerTotalHarme.toFixed(0);
-    },
+    }
   },
   watch: {
     playerGas() {
-      storage.set('_player_gas', this.playerGas);
+      storage.set("_player_gas", this.playerGas);
     },
     playerBone() {
-      storage.set('_player_bone', this.playerBone);
+      storage.set("_player_bone", this.playerBone);
     },
     playerDefense(newValue) {
       TweenLite.to(this.$data, 0.5, { tweenedPlayerDefense: newValue });
@@ -139,7 +147,7 @@ export default {
     },
     playerTotalHarm(newValue) {
       TweenLite.to(this.$data, 0.5, { tweenedPlayerTotalHarme: newValue });
-    },
+    }
   }
 };
 </script>
