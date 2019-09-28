@@ -60,6 +60,35 @@ const state = {
     { text: '引气', value: 48, ladder: 5, attribute: 2, addition: 86 },
     { text: '锁心', value: 49, ladder: 5, attribute: 4, addition: 86 },
     { text: '玄冰', value: 50, ladder: 5, attribute: 3, addition: 86 },
+
+
+    { text: '天罗', value: 51, ladder: 6, attribute: 1, addition: 155 },
+    { text: '云海', value: 52, ladder: 6, attribute: 2, addition: 165 },
+    { text: '静虚', value: 53, ladder: 6, attribute: 3, addition: 175 },
+    { text: '通玉', value: 54, ladder: 6, attribute: 4, addition: 185 },
+    { text: '镜天', value: 55, ladder: 6, attribute: 5, addition: 195 },
+    { text: '东胜', value: 56, ladder: 6, attribute: 1, addition: 205 },
+    { text: '乖离', value: 57, ladder: 6, attribute: 2, addition: 215 },
+    { text: '未央', value: 58, ladder: 6, attribute: 3, addition: 225 },
+    { text: '璎珞', value: 59, ladder: 6, attribute: 4, addition: 235 },
+    { text: '清云', value: 60, ladder: 6, attribute: 5, addition: 245 },
+    { text: '幽恒', value: 61, ladder: 6, attribute: 1, addition: 255 },
+    { text: '永夜', value: 62, ladder: 6, attribute: 2, addition: 265 },
+    { text: '玄灵', value: 63, ladder: 6, attribute: 3, addition: 275 },
+    { text: '诸星', value: 64, ladder: 6, attribute: 4, addition: 285 },
+    { text: '环琅', value: 65, ladder: 6, attribute: 5, addition: 295 },
+    { text: '昆墟', value: 66, ladder: 6, attribute: 1, addition: 305 },
+
+    { text: '归一', value: 68, ladder: 6, attribute: 1, addition: 595 },
+    { text: '无涯', value: 69, ladder: 6, attribute: 2, addition: 620 },
+    { text: '万神', value: 70, ladder: 6, attribute: 3, addition: 645 },
+    { text: '血殇', value: 71, ladder: 6, attribute: 3, addition: 670 },
+    { text: '御魂', value: 72, ladder: 6, attribute: 5, addition: 695 },
+    { text: '青冥', value: 73, ladder: 6, attribute: 1, addition: 720 },
+    { text: '玄冥', value: 74, ladder: 6, attribute: 2, addition: 745 },
+
+    { text: '炁体', value: 75, ladder: 6, attribute: 1, addition: 120 },
+    { text: '源流', value: 76, ladder: 6, attribute: 3, addition: 120 },
   ],
 }
 
