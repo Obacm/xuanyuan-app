@@ -11,7 +11,7 @@
     </div>
     <div class="box">
       <div class="m-3">
-        <b-form-input v-model="startLevel" type="number"></b-form-input>
+        <b-input v-model="startLevel" type="number" min=1 max=100></b-input>
       </div>
     </div>
     <div class="box">
@@ -19,23 +19,23 @@
     </div>
     <div class="box">
       <div class="m-3">
-        <b-form-input v-model="endLevel" type="number"></b-form-input>
+        <b-input v-model="endLevel" type="number" min=1 max=100></b-input>
       </div>
     </div>
     <div class="m-3 flex">
-      <b-badge class="flex-1" variant="warning">储量</b-badge>
+      <b-badge class="flex-1">储量</b-badge>
       <b-badge class="flex-1" variant="light">{{ reserves }}</b-badge>
     </div>
     <div class="m-3 flex">
-      <b-badge class="flex-1" variant="success">木材</b-badge>
+      <b-badge class="flex-1">木材</b-badge>
       <b-badge class="flex-1" variant="light">{{ woods }}</b-badge>
     </div>
     <div class="m-3 flex">
-      <b-badge class="flex-1" variant="danger">产量</b-badge>
+      <b-badge class="flex-1">产量</b-badge>
       <b-badge class="flex-1" variant="light">{{ additions }}</b-badge>
     </div>
     <div class="m-3 flex">
-      <b-badge class="flex-1" variant="dark">总木材</b-badge>
+      <b-badge class="flex-1" variant="warning">总木材</b-badge>
       <b-badge class="flex-1" variant="light">{{ totalWoods }}</b-badge>
     </div>
   </b-container>
@@ -89,7 +89,7 @@ export default {
     },
     totalWoods() {
       let total = 0;
-      for (let i = this.startLevel; i < this.endLevel; i++) {
+      for (let i = parseInt(this.startLevel); i < this.endLevel; i++) {
         total = total + this.getWoods(i)
       }
       return total;
@@ -103,7 +103,6 @@ export default {
 <style scoped>
   .flex{
     display: flex;
-    padding: .6rem 0;
   }
   .flex-1{
     flex:1;
