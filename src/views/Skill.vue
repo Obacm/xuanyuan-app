@@ -66,9 +66,14 @@
           :id="`tooltip-${collection.value}`"
           :class="{rubberBand: isAnimated}"
         >
-          {{ collection.text }}
-          <span v-if="category">{{ currentCategory.name }}</span>
+          {{ collection.text }}<span v-if="category">{{ currentCategory.name }}</span>
         </b-badge>
+        <b-tooltip
+          ref="tooltip"
+          :target="`tooltip-${collection.value}`"
+          variant="warning"
+        >{{ getAttributeText(collection.attribute) }} * {{ getAddition(collection.addition, collection.ladder) }}
+        </b-tooltip>
       </span>
     </div>
     <div class="box">
@@ -110,6 +115,12 @@ export default {
     },
     powerAddition(ladder) {
       return this.powerAttribute * ladder;
+    },
+    getAttributeText(attribute) {
+      return this.attributes.filter(item => item.value === attribute).shift().text;
+    },
+    getAddition(addition, ladder) {
+      return addition + this.powerAddition(ladder) + this.level - 1;
     }
   },
   computed: {
@@ -117,7 +128,8 @@ export default {
       "skills",
       "nodes",
       "categories",
-      "powers"
+      "powers",
+      "attributes"
     ]),
     currentCategory() {
       if (this.category) {
@@ -132,6 +144,7 @@ export default {
         let collections = this.ladders.map(element => {
           return this.skills.filter(item => item.ladder === element);
         });
+
         return flatten(collections);
       }
       return [];
@@ -143,7 +156,6 @@ export default {
           addition: element.addition + this.powerAddition(element.ladder) + this.level - 1
         }));
       }
-
       return 0;
     },
     totalAttribute() {
@@ -151,7 +163,6 @@ export default {
       this.additionCollections.forEach(element => {
         sum = sum + element.addition;
       });
-
       return sum;
     },
     totalLastAttribute() {

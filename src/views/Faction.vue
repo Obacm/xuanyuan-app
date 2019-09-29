@@ -52,12 +52,14 @@
           variant="warning"
           :target="`tooltip-${collection.value}`"
           v-if="collection.class === 3"
-        >{{ setAttribute(collection.attribute, collection.addition) }}</b-tooltip>
+        >{{ setAttribute(collection.attribute, collection.addition) }}
+        </b-tooltip>
         <b-tooltip
           ref="tooltip"
           :target="`tooltip-${collection.value}`"
           v-if="collection.class === 1 || collection.class === 2"
-        >{{ collection.stunt }}</b-tooltip>
+        >{{ collection.stunt }}
+        </b-tooltip>
       </span>
     </div>
     <div class="box">
