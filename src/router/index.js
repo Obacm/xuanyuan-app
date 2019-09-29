@@ -7,6 +7,7 @@ import Boss from '../views/Boss'
 import Faction from '../views/Faction'
 import Grade from '../views/Grade'
 import Skill from '../views/Skill'
+import Abode from '../views/Abode'
 
 Vue.use(Router)
 
@@ -68,6 +69,16 @@ let routes = [
     meta: {
       title: '计量器_功法',
       variant: 'dark',
+      display: true,
+    }
+  },
+  {
+    path: '/abode',
+    component: Abode,
+    name: '洞府',
+    meta: {
+      title: '计量器_洞府',
+      variant: 'success',
       display: true,
     }
   },

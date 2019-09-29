@@ -4,6 +4,7 @@ import Grade from './Grade'
 import Faction from './Faction'
 import Skill from './Skill'
 import Power from './Power'
+import Abode from './Abode'
 
 export default {
   SkyMap,
@@ -12,4 +13,5 @@ export default {
   Faction,
   Skill,
   Power,
+  Abode,
 }

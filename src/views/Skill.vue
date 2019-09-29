@@ -87,7 +87,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import flatten from "../utils/helper";
+import { flatten } from "../utils/helper";
 
 export default {
   data() {
